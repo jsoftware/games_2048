@@ -1,4 +1,9 @@
 games/2048 - change history
 
+== 1.0.1 ==
+ * fix: Line merging behaviour
+ * fix: Use J path to fix console on Windows
+ * chg: Display score in static control not statusbar
+
 == 1.0.0 ==
  * Initial release
