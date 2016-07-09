@@ -1,5 +1,14 @@
 games/2048 - change history
 
+== 1.0.3 ==
+ * new: Resizable window
+ * fix: tidy up numeric locales
+ * fix: prevent selecting table cells
+ * chg: move direction verbs to engine
+
+== 1.0.2 ==
+ * chg: release for J805 beta
+
 == 1.0.1 ==
  * fix: Line merging behaviour
  * fix: Use J path to fix console on Windows

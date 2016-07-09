@@ -22,12 +22,11 @@ BColors=: <;.1 , ];._2 (0 :0)
 #be7e56#be5e56#9c3931#701710
 )
 FColor=: <'#333333'
-Tblsz=: 400
 
 NB. Form definitions
 NB. =========================================================
 MSWD=: noun define
-pc mswd nosize escclose closeok;pn "2048";
+pc mswd escclose;pn "2048";
 menupop "&Game";
 menu new "&New Game";
 menusep;
@@ -44,7 +43,7 @@ menu help "&Instructions";
 menu about "&About";
 menupopz;
 
-cc g table flush;
+cc g table flush;set g minwh 335 335;
 bin hvhs;
 cc up button;cn Up;
 bin szhs;
@@ -84,10 +83,7 @@ NB. Methods
 NB. =========================================================
 create=: verb define
   wd MSWD
-  NB. need unique handle for mswd window to handle multiple instances of class
-  MSWD_hwnd=: wd 'qhwndp'  NB. assign hwnd this for mswd in instance locale
   startNew y
-  wd 'set g minwh ',": 2#Tblsz
   wd 'pshow'
 )
 
@@ -100,26 +96,42 @@ mswd_exit_button=: destroy
 mswd_close=: destroy
 mswd_cancel=: destroy
 
+mswd_leftm_button=: mswd_left_button=: left
+mswd_rightm_button=: mswd_right_button=: right
+mswd_upm_button=: mswd_up_button=: up
+mswd_downm_button=: mswd_down_button=: down
+
+mswd_new_button=: startNew
+mswd_help_button=: sminfo bind ('2048 Instructions';Instructions)
+mswd_about_button=: sminfo bind ('About 2048';About)
+
+NB. mswd_default =: 3 : 'smoutput wdq'
+NB. mswd_g_mark=: verb define
+NB. Posns=. _3 ]\ '1 01 20 12 1'
+NB.  echo g
+NB.  echo Posns i. g
+NB.  left`right`up`down`]@.(Posns i. ]) g
+NB.  wd 'set g select 1 1' NB. select position 1 1
+NB. )
+
 fmtTable=: verb define
   wd 'set g shape ',": Gridsz
   wd 'set g align ',": 1 $~ {: Gridsz
   wd 'set g type ',": ,0 $~ Gridsz
-  wd 'set g protect ',": ,1 $~ Gridsz
-  wd 'set g nofocus'
+  wd 'set g enable 0'
   wd 'set g font SansSerif 20 bold'
-  showGrid y
   y
 )
 
 showGrid=: verb define
-  wd 'psel ', MSWD_hwnd
   tbl=. (y=0)} (8!:0 y) ,: <'""'
   wd 'set g data *', ' ' joinstring ,tbl
   bkgrd=. BColors {~ (* __&~:)@(%&^. 2:) ,y
   wd 'set g color ', ' ' joinstring ,bkgrd ,. FColor
-  cellsz=. Gridsz <.@%~ Tblsz-1
-  wd 'set g rowheight ',": {.cellsz
-  wd 'set g colwidth ',": {:cellsz
+  tblsz=. _99 ". wd 'get g wh'
+  cellsz=. Gridsz <.@%~ tblsz-2
+  wd 'set g colwidth ',": {.cellsz
+  wd 'set g rowheight ',": {:cellsz
 )
 
 startNew=: update@fmtTable@new2048
@@ -135,22 +147,6 @@ update=: verb define
     empty''
   end.
 )
-
-mswd_left_button=: 3 :'mergerow toLeft move (scorerow toLeft)'
-mswd_right_button=: 3 :'mergerow toRight move (scorerow toRight)'
-mswd_up_button=: 3 :'mergerow toUp move (scorerow toUp)'
-mswd_down_button=: 3 :'mergerow toDown move (scorerow toDown)'
-
-mswd_leftm_button=: mswd_left_button
-mswd_rightm_button=: mswd_right_button
-mswd_upm_button=: mswd_up_button
-mswd_downm_button=: mswd_down_button
-
-mswd_new_button=: startNew
-
-mswd_help_button=: sminfo bind ('Minesweeper Instructions';Instructions)
-mswd_about_button=: sminfo bind ('About 2048';About)
-
 
 NB. Auto-run UI
 NB. =========================================================
