@@ -1,5 +1,13 @@
 games/2048 - change history
 
+== 1.0.5 ==
+ * fix: score when win
+ * chg: refactor update into engine
+ * chg: tidy up AddonPath
+
+== 1.0.4 ==
+ * chg: release for J806 beta
+
 == 1.0.3 ==
  * new: Resizable window
  * fix: tidy up numeric locales
