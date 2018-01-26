@@ -1,5 +1,8 @@
 games/2048 - change history
 
+== 1.0.6 ==
+ * chg: use arrow keys for movement
+
 == 1.0.5 ==
  * fix: score when win
  * chg: refactor update into engine
