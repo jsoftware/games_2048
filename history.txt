@@ -1,5 +1,9 @@
 games/2048 - change history
 
+== 1.0.8 ==
+ * chg: tidy up engine
+ * chg: renamed commands for console ui
+
 == 1.0.6 ==
  * chg: use arrow keys for movement
 

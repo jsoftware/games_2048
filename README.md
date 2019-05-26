@@ -1,4 +1,4 @@
-# g2048
+# 2048 Game
 An implementation of the 2048 game in J.
 
 The basic game engine is described in the `engine.ijs` script.
