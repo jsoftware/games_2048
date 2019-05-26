@@ -10,7 +10,7 @@ g2048Con_z_=: conew&'g2048con'
 loc_z_=: 3 : 'jpath > (4!:4 <''y'') { 4!:3 $0'  NB. pathname of script calling it
 AddonPath=. fpath_j_ loc ''
 
-require AddonPath,'/engine.ijs'
+load AddonPath,'/engine.ijs'
 coclass 'g2048con'
 coinsert 'g2048'
 
@@ -21,6 +21,11 @@ create=: verb define
 
 destroy=: codestroy
 quit=: destroy
+
+Left=: 3 : 'left Grid'
+Right=: 3 : 'right Grid'
+Up=: 3 : 'up Grid'
+Down=: 3 : 'down Grid'
 
 startNew=: update@new2048
 endGame=: destroy@('' [ echo)
@@ -33,10 +38,10 @@ Object:
 How to play:
   When 2 numbers the same touch they merge.
   - move numbers using the commands below:
-       right__grd ''
-       left__grd ''
-       up__grd ''
-       down__grd ''
+       Right__grd ''
+       Left__grd ''
+       Up__grd ''
+       Down__grd ''
   - quit a game:
        quit__grd ''
   - start a new game:
