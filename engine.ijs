@@ -53,22 +53,14 @@ down=: (mergerow toDown) move (scorerow toDown)
 noMoves=: (0 -.@e. ,)@(mergerow toRight , mergerow toLeft , mergerow toUp ,: mergerow toDown)
 hasWon=: Target e. ,
 
-eval=: verb define
-  'grid points'=. y
-  Score=: Score + points
-  isend=. (noMoves , hasWon) grid
-  msg=. isend # 'You lost!!';'You Won!!'
-  isend=. +./ isend
-  isend;msg
-)
-
 update=: verb define
-  Grid=: 0{:: y       NB. update global Grid
-  'isend msg'=. eval y
-  showGrid 0{:: y
+  'grid points'=. y
+  Grid=: grid              NB. update global Grid
+  Score=: Score + points   NB. update global Score
+  showGrid grid
   showScore 'Score: ',(": Score)
-  if. isend do.
-    endGame msg
+  if. +./ isend=. (noMoves , hasWon) grid do.
+    endGame isend # 'You lost!!';'You Won!!'
   end.
   empty''
 )
